@@ -1,5 +1,8 @@
+import { useParams } from "react-router-dom";
+
 const EditEvent = () => {
-  return <div>EditEvent</div>;
+  const { id } = useParams();
+  return <div>Edit Event - {id}</div>;
 };
 
 export default EditEvent;

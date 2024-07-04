@@ -1,13 +1,15 @@
-import Clubbing from "./components/clubbing";
-import Comedy from "./components/trending";
 import Hero from "./components/hero";
+import FeaturedEvents from "./components/featuredEvents";
+import Trending from "./components/trending";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <Hero />
-      <Clubbing />
-      <Comedy />
+      <div className="bg-[#EBEAEC]">
+        <FeaturedEvents />
+        <Trending />
+      </div>
     </div>
   );
 };

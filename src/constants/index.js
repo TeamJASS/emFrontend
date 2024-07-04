@@ -6,7 +6,7 @@ const K = {
     },
     {
       name: "All Events",
-      path: "/all-events",
+      path: "/event-list",
     },
     {
       name: "Clubbing",
@@ -19,10 +19,6 @@ const K = {
     {
       name: "Live Music",
       path: "/live-music",
-    },
-    {
-      name: "Comedy",
-      path: "/comedy",
     },
   ],
 };

@@ -1,8 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import K from "../constants";
 
-const Navbar = () => {
+const K = {
+  NAVLINKS: [
+    {
+      name: "Admin",
+      path: "/admin",
+    },
+    {
+      name: "Events",
+      path: "/admin/event-list",
+    },
+    {
+      name: "Users",
+      path: "/admin/users",
+    },
+    {
+      name: "Vendors",
+      path: "/admin/vendors",
+    },
+    {
+      name: "Bookings",
+      path: "/admin/bookings",
+    },
+  ],
+};
+
+const AdminNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarHeight, setNavbarHeight] = useState(0);
   const navbarRef = useRef(null);
@@ -47,16 +71,16 @@ const Navbar = () => {
           {/* Action Buttons */}
           <div className="hidden md:flex space-x-4">
             <Link
-              to="/login"
+              to="/admin/event-create"
               className="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"
             >
-              Login
+              Add Event
             </Link>
             <Link
-              to="/signup"
+              to="/admin/user-create"
               className="bg-white text-primary px-4 py-2 rounded hover:bg-gray-200"
             >
-              Sign Up
+              Add User
             </Link>
           </div>
 
@@ -100,16 +124,16 @@ const Navbar = () => {
             </Link>
           ))}
           <Link
-            to="/login"
+            to="/admin/event-create"
             className="block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"
           >
-            Login
+            Add Event
           </Link>
           <Link
-            to="/signup"
+            to="/admin/user-create"
             className="block bg-white text-primary px-4 py-2 rounded hover:bg-gray-200"
           >
-            Sign Up
+            Add User
           </Link>
         </div>
       </nav>
@@ -118,4 +142,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;
