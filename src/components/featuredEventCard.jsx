@@ -7,12 +7,12 @@ const FeaturedEventCard = (props) => {
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent), url(${props.event.image})`,
+        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent), url( ${`https://savefiles.org/${props.event.image}?shareable_link=286`})`,
       }}
       className={`bg-cover ${!isHovered && "p-4"}
-      cursor-pointer relative flex flex-col ${
-        isHovered ? "justify-center" : "justify-end"
-      } bg-dark text-white h-[300px] rounded-lg  overflow-hidden`}
+    cursor-pointer relative flex flex-col ${
+      isHovered ? "justify-center" : "justify-end"
+    } bg-dark text-white h-[300px] rounded-lg  overflow-hidden`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -31,9 +31,12 @@ const FeaturedEventCard = (props) => {
         >
           {isHovered ? (
             <>
-              <h2 className="text-2xl  mb-4 ">{props.event.title}</h2>
-              <div className="flex justify-between">
-                <span className="text-xl">{props.event.price}</span>
+              <h2 className="text-xl  mb-4 ">{props.event.name}</h2>
+              <p className="text-sm text-center mb-4">
+                {props.event.description}
+              </p>
+              <div className="flex justify-between items-center align-middle">
+                <span className="text-xl">GHC{props.event.price}</span>
                 <button className="bg-primary text-xl text-white px-4 py-2 rounded hover:bg-primary-dark">
                   Book Now
                 </button>

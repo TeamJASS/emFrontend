@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { categories, events, genres } from "../../../dataPlaceHolder"; // Assuming categories are imported correctly
+import { useState } from "react";
+import { categories } from "../../../dataPlaceHolder"; // Assuming categories are imported correctly
 import { validateField } from "../../../lib/admin";
-import { createEvent } from "../../../lib/data";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const EventCreate = () => {
   const [formData, setFormData] = useState({
@@ -51,6 +51,14 @@ const EventCreate = () => {
     }
 
     // Handle form submission logic here
+    // collect all inputs  from form
+    const sformData = new FormData(event.target);
+    // post data to backend
+    const response = await axios.post(
+      `https://embackend-lnot.onrender.com/events`,
+      sformData
+    );
+    console.log(response);
     // const newEvent = await createEvent(formData);
     toast.success(`New Event Created - ${formData.title}`);
     console.log(formData); // Example: Logging form data for testing

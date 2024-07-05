@@ -1,17 +1,17 @@
+/* eslint-disable react/prop-types */
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import TrendingEventCard from "../../../components/trendingEventCard";
-import { events } from "../../../dataPlaceHolder";
 import { Link } from "react-router-dom";
 
-const Trending = () => {
+const Trending = (props) => {
   return (
     <div className="container mx-auto pb-10 pt-20 ">
       <h2 className="text-4xl text-center font-semibold mb-10">
         Trending Events
       </h2>
       <div className="grid grid-cols-4 gap-10">
-        {events &&
-          events.map((e, i) => {
+        {props.events &&
+          props.events.map((e, i) => {
             return <TrendingEventCard key={i} event={e} />;
           })}
       </div>

@@ -11,7 +11,7 @@ const TrendingEventCard = (props) => {
   }
 
   return (
-    <div className="relative flex flex-col border-gray-300 border-[1px] rounded-lg ">
+    <div className="relative flex flex-col border-gray-300 border-[1px] rounded-lg  ">
       <div className="flex justify-between">
         <button className="absolute text-sm p-1 text-white left-0 top-0 bg-primary w-[40%] hover:bg-dark">
           {props.event.category}
@@ -20,7 +20,7 @@ const TrendingEventCard = (props) => {
       </div>
       <div className="h-[200px]">
         <img
-          src={props.event.image}
+          src={`https://savefiles.org/${props.event.image}?shareable_link=286`}
           alt={props.event.title}
           style={{ width: "100%", height: "200px" }}
           className="rounded-t-lg"
@@ -48,7 +48,7 @@ const TrendingEventCard = (props) => {
           })}
         </div>
 
-        <div className="flex w-full mt-6 border-t-gray-300 border-y-[1px]">
+        <div className="flex gap-4 w-full mt-6 border-t-gray-300 border-y-[1px]">
           <div className="w-[40%]">
             <h4 className="text-xl text-gray-500">From</h4>
             <h4 className="text-xl font-bold">GHC{props.event.price}</h4>

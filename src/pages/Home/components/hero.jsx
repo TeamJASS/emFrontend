@@ -1,12 +1,31 @@
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { events } from "../../../dataPlaceHolder";
+import { useNavigate } from "react-router-dom";
+// import { events } from "../../../dataPlaceHolder";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import { events } from "../../../dataPlaceHolder";
 
-const Hero = () => {
+const Hero = (props) => {
+  const [startDate, setStartDate] = useState();
+  const [city, setCity] = useState("");
+  const [category, setCategory] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (city) params.append("city", city);
+    if (category) params.append("category", category);
+    if (startDate) params.append("date", startDate.toISOString().split("T")[0]);
+    navigate(`/event-list?${params.toString()}`);
+  };
+
   return (
     <div className="bg-dark text-white">
       <Swiper
@@ -27,7 +46,7 @@ const Hero = () => {
         className="bg-dark h-[65vh] "
         loop={true}
       >
-        {events.map((event, index) => {
+        {props.events.map((event, index) => {
           return (
             <SwiperSlide
               key={index}
@@ -35,7 +54,7 @@ const Hero = () => {
             >
               <div className="absolute h-[65vh] z-[-1] w-full">
                 <img
-                  src={event.image}
+                  src={`https://savefiles.org/${event.image}?shareable_link=286`}
                   style={{ width: "80%", margin: "auto", display: "block" }}
                   className="object-cover"
                   alt={event.title}
@@ -60,41 +79,47 @@ const Hero = () => {
         <div className="bg-primary p-10 flex flex-col justify-start align-middle gap-4 w-[70%] m-auto">
           <h1 className="text-5xl font-semibold">Where is the Tukio at?</h1>
           <div className="flex">
-            <form className="flex items-center align-middle text-gray-400 w-full gap-1">
-              <div className="flex items-center bg-white px-5 w-full max-w-md border border-teal-500 ">
-                <MagnifyingGlassIcon className="h-5 w-5 text-gray-500 mr-2" />
-                <input
-                  type="text"
-                  name="location"
-                  placeholder="Accra, Ghana"
-                  className="px-3 py-3 focus:outline-none focus:border-primary flex-auto"
-                />
-              </div>
+            <form
+              onSubmit={handleSubmit}
+              className="flex items-center align-middle text-gray-400 w-full gap-1"
+            >
               <select
-                name="category"
+                name="city"
                 className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1"
-                placeholder="All"
+                placeholder="Location(city)"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               >
-                <option value="0">All</option>
-                <option value="1">This Friday</option>
-                <option value="2">This Saturday</option>
-                <option value="3">This Sunday</option>
-                <option value="4">This Weekend</option>
+                <option value="">All Cities</option>
+                <option value="Accra">Accra</option>
+                <option value="Kumasi">Kumasi</option>
+                <option value="Cape Coast">Cape Coast</option>
+                <option value="Takoradi">Takoradi</option>
               </select>
               <select
                 name="category"
                 className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1"
-                placeholder="All Categories"
+                placeholder="Category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">All Categories</option>
-                <option value="1">Clubbing</option>
-                <option value="2">Comedy</option>
-                <option value="3">Culture</option>
-                <option value="4">Festivals</option>
-                <option value="5">Live Music</option>
-                <option value="6">Meet-ups</option>
-                <option value="7">Online</option>
+                <option value="Clubbing">Clubbing</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Culture">Culture</option>
+                <option value="Festivals">Festivals</option>
+                <option value="Live Music">Live Music</option>
+                <option value="Meet-ups">Meet-ups</option>
+                <option value="Online">Online</option>
               </select>
+              <DatePicker
+                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                dateFormat="MM/yyyy"
+                showMonthYearPicker
+                placeholderText="Month & Year"
+              />
               <button
                 type="submit"
                 className="bg-dark text-white px-5 py-3.5  hover:bg-primary-dark focus:outline-none flex-1 "

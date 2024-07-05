@@ -8,6 +8,9 @@ const Navbar = () => {
   const navbarRef = useRef(null);
   const location = useLocation();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   useEffect(() => {
     if (navbarRef.current) {
       setNavbarHeight(navbarRef.current.offsetHeight);
@@ -32,11 +35,14 @@ const Navbar = () => {
               const isActive = location.pathname === k.path;
               return (
                 <Link
+                  onClick={scrollToTop}
                   key={index}
                   to={k.path}
                   className={`${
-                    isActive ? "border-b-primary text-primary" : ""
-                  } text-white border-b-2 border-b-transparent p-4 hover:text-primary hover:border-b-primary`}
+                    isActive
+                      ? "text-primary border-b-primary border-b-2"
+                      : "text-white border-b-transparent"
+                  } p-4 hover:text-primary hover:border-b-primary hover:border-b-2`}
                 >
                   {k.name}
                 </Link>
@@ -90,15 +96,20 @@ const Navbar = () => {
             isMenuOpen ? "block" : "hidden"
           } bg-primary text-white p-4 space-y-4`}
         >
-          {K.NAVLINKS.map((k, index) => (
-            <Link
-              key={index}
-              to={k.path}
-              className="block hover:text-secondary"
-            >
-              {k.name}
-            </Link>
-          ))}
+          {K.NAVLINKS.map((k, index) => {
+            const isActive = location.pathname === k.path;
+            return (
+              <Link
+                key={index}
+                to={k.path}
+                className={`block hover:text-secondary ${
+                  isActive ? "text-secondary" : ""
+                }`}
+              >
+                {k.name}
+              </Link>
+            );
+          })}
           <Link
             to="/login"
             className="block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"

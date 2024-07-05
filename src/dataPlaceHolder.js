@@ -57,62 +57,62 @@ export const events = [
 
 export const genres = [
   {
-    id: "g01",
+    id: "Amapiano",
     name: "amapiano",
   },
   {
-    id: "g02",
+    id: "Azonto",
     name: "azonto",
   },
   {
-    id: "g03",
+    id: "Gospel",
     name: "gospel",
   },
   {
-    id: "g04",
+    id: "Reggae",
     name: "reggae",
   },
   {
-    id: "g05",
+    id: "Dancehall",
     name: "dancehall",
   },
   {
-    id: "g06",
+    id: "Pop",
     name: "pop",
   },
   {
-    id: "g07",
+    id: "R&B",
     name: "R&B",
   },
 ];
 
 export const categories = [
   {
-    id: "c01",
+    id: "Clubbing",
     name: "Clubbing",
   },
   {
-    id: "c02",
+    id: "Comedy",
     name: "Comedy",
   },
   {
-    id: "c03",
+    id: "Culture",
     name: "Culture",
   },
   {
-    id: "c04",
+    id: "Festivals",
     name: "Festivals",
   },
   {
-    id: "c05",
+    id: "Live Music",
     name: "Live Music",
   },
   {
-    id: "c06",
+    id: "Meet Ups",
     name: "Meet-ups",
   },
   {
-    id: "c07",
+    id: "Online",
     name: "Online",
   },
 ];
