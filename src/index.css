@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 20px; /* Adjust width as needed */
+  height: 20px; /* Adjust height as needed */
+  color: white; /* Text color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.swiper-button-prev {
+  margin-left: 20px;
+}
+.swiper-button-next {
+  margin-right: 30px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #7c2b61; /* Darker color on hover */
+}
+
+.swiper-pagination {
+  bottom: 10px; /* Adjust position of pagination */
+}
+
+.swiper-pagination-bullet {
+  width: 50px; /* Width of each bullet */
+  height: 3px; /* Height of each bullet */
+  background-color: #fff8f8; /* Default color for inactive bullets */
+  margin: 0 5px; /* Spacing between bullets */
+  border-radius: 1px; /* Optional: Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition for color change */
+}
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #ff00c3; /* Color of the active bullet */
+}

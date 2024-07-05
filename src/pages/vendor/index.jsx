@@ -1,5 +1,9 @@
 const Vendor = () => {
-  return <div>Vendor</div>;
+  return (
+    <div>
+      <h2>Vendor Dashboard</h2>
+    </div>
+  );
 };
 
 export default Vendor;

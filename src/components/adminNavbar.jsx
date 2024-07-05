@@ -1,16 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import K from "../constants";
 
-const Navbar = () => {
+const K = {
+  NAVLINKS: [
+    {
+      name: "Admin",
+      path: "/admin",
+    },
+    {
+      name: "Events",
+      path: "/admin/event-list",
+    },
+    {
+      name: "Users",
+      path: "/admin/users",
+    },
+    {
+      name: "Vendors",
+      path: "/admin/vendors",
+    },
+    {
+      name: "Bookings",
+      path: "/admin/bookings",
+    },
+  ],
+};
+
+const AdminNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarHeight, setNavbarHeight] = useState(0);
   const navbarRef = useRef(null);
   const location = useLocation();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
   useEffect(() => {
     if (navbarRef.current) {
       setNavbarHeight(navbarRef.current.offsetHeight);
@@ -35,14 +56,11 @@ const Navbar = () => {
               const isActive = location.pathname === k.path;
               return (
                 <Link
-                  onClick={scrollToTop}
                   key={index}
                   to={k.path}
                   className={`${
-                    isActive
-                      ? "text-primary border-b-primary border-b-2"
-                      : "text-white border-b-transparent"
-                  } p-4 hover:text-primary hover:border-b-primary hover:border-b-2`}
+                    isActive ? "border-b-primary text-primary" : ""
+                  } text-white border-b-2 border-b-transparent p-4 hover:text-primary hover:border-b-primary`}
                 >
                   {k.name}
                 </Link>
@@ -53,16 +71,16 @@ const Navbar = () => {
           {/* Action Buttons */}
           <div className="hidden md:flex space-x-4">
             <Link
-              to="/login"
+              to="/admin/event-create"
               className="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"
             >
-              Login
+              Add Event
             </Link>
             <Link
-              to="/signup"
+              to="/admin/user-create"
               className="bg-white text-primary px-4 py-2 rounded hover:bg-gray-200"
             >
-              Sign Up
+              Add User
             </Link>
           </div>
 
@@ -96,31 +114,26 @@ const Navbar = () => {
             isMenuOpen ? "block" : "hidden"
           } bg-primary text-white p-4 space-y-4`}
         >
-          {K.NAVLINKS.map((k, index) => {
-            const isActive = location.pathname === k.path;
-            return (
-              <Link
-                key={index}
-                to={k.path}
-                className={`block hover:text-secondary ${
-                  isActive ? "text-secondary" : ""
-                }`}
-              >
-                {k.name}
-              </Link>
-            );
-          })}
+          {K.NAVLINKS.map((k, index) => (
+            <Link
+              key={index}
+              to={k.path}
+              className="block hover:text-secondary"
+            >
+              {k.name}
+            </Link>
+          ))}
           <Link
-            to="/login"
+            to="/admin/event-create"
             className="block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"
           >
-            Login
+            Add Event
           </Link>
           <Link
-            to="/signup"
+            to="/admin/user-create"
             className="block bg-white text-primary px-4 py-2 rounded hover:bg-gray-200"
           >
-            Sign Up
+            Add User
           </Link>
         </div>
       </nav>
@@ -129,4 +142,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;
