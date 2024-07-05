@@ -7,7 +7,7 @@ import axios from "axios";
 const EventCreate = () => {
   const [formData, setFormData] = useState({
     image: "",
-    title: "",
+    name: "",
     location: "",
     price: "",
     date: "",
@@ -95,18 +95,18 @@ const EventCreate = () => {
                 htmlFor="title"
                 className="block text-gray-500 font-bold mb-1 ml-4"
               >
-                TITLE
+                NAME
               </label>
               <input
                 type="text"
-                id="title"
-                name="title"
-                value={formData.title}
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleEventChange}
                 className="h-14 bg-[#f1f1f1] w-full px-3 py-2 border-[#00B4BF] border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
               />
-              {errors.title && (
-                <p className="text-red-500 text-sm ml-4">{errors.title}</p>
+              {errors.name && (
+                <p className="text-red-500 text-sm ml-4">{errors.name}</p>
               )}
             </div>
             <div className="mb-8">
