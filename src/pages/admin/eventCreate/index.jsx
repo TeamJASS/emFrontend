@@ -2,7 +2,8 @@ import { useState } from "react";
 import { categories } from "../../../dataPlaceHolder"; // Assuming categories are imported correctly
 import { validateField } from "../../../lib/admin";
 import { toast } from "react-toastify";
-import axios from "axios";
+import LoadingSpinner from "../../../components/Feedbacks/loadingSpinner";
+import { createEvent } from "../../../lib/data";
 
 const EventCreate = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const EventCreate = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleEventChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +37,7 @@ const EventCreate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
@@ -50,18 +53,9 @@ const EventCreate = () => {
       return;
     }
 
-    // Handle form submission logic here
-    // collect all inputs  from form
-    const sformData = new FormData(event.target);
-    // post data to backend
-    const response = await axios.post(
-      `https://embackend-lnot.onrender.com/events`,
-      sformData
-    );
-    console.log(response);
-    // const newEvent = await createEvent(formData);
-    toast.success(`New Event Created - ${formData.title}`);
-    console.log(formData); // Example: Logging form data for testing
+    const newEvent = await createEvent(new FormData(e.target));
+    toast.success(`New Event Created - ${newEvent.name}`);
+    setLoading(false);
   };
 
   return (
@@ -280,8 +274,13 @@ const EventCreate = () => {
           <button
             type="submit"
             className="my-10 p-4 rounded-lg bg-primary text-white font-bold hover:bg-dark w-[40%] mx-auto"
+            // disabled={loading}
           >
-            Submit
+            {loading ? (
+              <LoadingSpinner className="h-6 w-6 mx-auto" />
+            ) : (
+              "Submit"
+            )}
           </button>
         </div>
       </form>

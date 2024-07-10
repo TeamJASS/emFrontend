@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { HeartIcon, StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
@@ -15,13 +15,16 @@ const AdminEventCard = (props) => {
   return (
     <div className="relative flex flex-col border-gray-300 border-[1px] rounded-lg ">
       <div className="flex justify-between">
-        <button className="absolute text-sm p-1  left-0 top-0   hover:bg-dark">
+        <button
+          className="absolute text-sm p-1  left-0 top-0   hover:bg-dark"
+          onClick={props.onDelete}
+        >
           <TrashIcon className="h-8 w-8 text-red-700 bg-white rounded-full" />
         </button>
       </div>
       <div className="h-[200px]">
         <img
-          src={props.event.image}
+          src={`https://savefiles.org/${props.event.image}?shareable_link=286`}
           alt={props.event.title}
           style={{ width: "100%", height: "200px" }}
           className="rounded-t-lg"

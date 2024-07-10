@@ -15,9 +15,11 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString("en-US", options);
 };
 
-export const fetchEvents = async () => {
+export const fetchEvents = async (query) => {
   try {
-    const response = await axios.get(`${BASE_URL}/events`);
+    const response = await axios.get(
+      `${BASE_URL}/events?${query.limit && `limit=${query.limit}`}`
+    );
     if (response.status === 200) {
       response.data.forEach((element) => {
         element.rating = 5;
@@ -36,14 +38,20 @@ export const fetchEvents = async () => {
 
 export const createEvent = async (formData) => {
   try {
-    const response = await axios.post(`${BASE_URLs}/event-create`, formData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.post(`${BASE_URL}/events`, formData);
     return response.data;
   } catch (error) {
     console.error("Error creating event:", error);
+    throw error;
+  }
+};
+
+export const deleteEvent = async (id) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/events/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting event:", error);
     throw error;
   }
 };

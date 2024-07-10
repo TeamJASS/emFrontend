@@ -14,10 +14,10 @@ const EventList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage] = useState(4);
 
-  const getEvents = async () => {
+  const getEvents = async (limit) => {
     try {
       setLoading(true);
-      const data = await fetchEvents();
+      const data = await fetchEvents({ limit });
       data.length ? setEvents(data) : setEvents(MyEvents);
       setLoading(false);
     } catch (error) {
@@ -26,33 +26,33 @@ const EventList = () => {
     }
   };
 
-  const getEventsByDate = async (date) => {
-    try {
-      setLoading(true);
-      const data = await fetchEvents(date);
-      data.forEach((element) => {
-        element.rating = 5;
-        element.genres = ["Reggae", "Gospel", "Hip-Hop"];
-        element.title = element.name;
-      });
-      data.length ? setEvents(data) : setEvents(MyEvents);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error("get events error ----->", error);
-    }
-  };
+  // const getEventsByDate = async (date) => {
+  //   try {
+  //     setLoading(true);
+  //     const data = await fetchEvents(date);
+  //     data.forEach((element) => {
+  //       element.rating = 5;
+  //       element.genres = ["Reggae", "Gospel", "Hip-Hop"];
+  //       element.title = element.name;
+  //     });
+  //     data.length ? setEvents(data) : setEvents(MyEvents);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     console.error("get events error ----->", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getEventsByDate(selectedDate);
-  }, [selectedDate]);
+  // useEffect(() => {
+  //   getEventsByDate(selectedDate);
+  // }, [selectedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   useEffect(() => {
-    getEvents();
+    getEvents(20);
   }, []);
 
   // Get current events

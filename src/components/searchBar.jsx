@@ -17,7 +17,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-white shadow-lg rounded-lg">
+    <div className="container mx-auto p-4 bg-white shadow-lg rounded-lg mb-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Event Name */}
         <div>

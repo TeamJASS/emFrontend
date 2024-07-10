@@ -12,10 +12,10 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
 
   // Define a function to fetch events
-  const getEvents = async () => {
+  const getEvents = async (limit) => {
     try {
       setLoading(true);
-      const data = await fetchEvents();
+      const data = await fetchEvents(limit);
       console.log("Events------>", data);
       data.length ? setEvents(data) : setEvents(MyEvents);
       setLoading(false);
@@ -30,7 +30,7 @@ const Home = () => {
     // getTopEvents();
     // getFeaturedEvents();
     // getTrendingEvents();
-    getEvents();
+    getEvents(20);
   }, []);
   return (
     <div className="">

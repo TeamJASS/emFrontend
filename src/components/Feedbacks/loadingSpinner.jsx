@@ -1,8 +1,8 @@
 import Spinner from "../../assets/images/loadingSpinner.svg";
 
-const LoadingSpinner = () => {
+const LoadingSpinner = (props) => {
   return (
-    <div className="h-[20vh] w-[30%] mx-auto">
+    <div className="h-[20vh] w-[30%] mx-auto" {...props}>
       <img src={Spinner} alt="loading" className="h-full w-full" />
     </div>
   );
