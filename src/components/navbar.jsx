@@ -1,12 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import K from "../constants";
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarHeight, setNavbarHeight] = useState(0);
   const navbarRef = useRef(null);
   const location = useLocation();
+  const menuRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -71,6 +86,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white focus:outline-none"
+              aria-label="Toggle menu"
             >
               <svg
                 className="w-6 h-6"
@@ -92,6 +108,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
+          ref={menuRef}
           className={`md:hidden ${
             isMenuOpen ? "block" : "hidden"
           } bg-primary text-white p-4 space-y-4`}
@@ -105,6 +122,7 @@ const Navbar = () => {
                 className={`block hover:text-secondary ${
                   isActive ? "text-secondary" : ""
                 }`}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {k.name}
               </Link>
@@ -112,16 +130,55 @@ const Navbar = () => {
           })}
           <Link
             to="/login"
-            className="block bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"
+            className="block bg-secondary text-white px-6 py-2 rounded hover:bg-secondary-dark w-[80%] sm:w-[60%] mx-auto"
+            onClick={() => setIsMenuOpen(false)}
           >
             Login
           </Link>
+
           <Link
             to="/signup"
-            className="block bg-white text-primary px-4 py-2 rounded hover:bg-gray-200"
+            className="block bg-white text-primary px-6 py-2 rounded hover:bg-gray-200 w-[80%] sm:w-[60%] mx-auto"
+            onClick={() => setIsMenuOpen(false)}
           >
             Sign Up
           </Link>
+
+          {/* Social Media Icons Section */}
+          <div className="flex justify-center space-x-4 mt-6">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-secondary"
+            >
+              <FaFacebook size={24} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-secondary"
+            >
+              <FaTwitter size={24} />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-secondary"
+            >
+              <FaInstagram size={24} />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-secondary"
+            >
+              <FaLinkedin size={24} />
+            </a>
+          </div>
         </div>
       </nav>
       <div style={{ height: navbarHeight }} className="bg-dark"></div>

@@ -6,7 +6,6 @@ import AdminEventCard from "../components/adminEventCard";
 import LoadingSpinner from "../../../components/Feedbacks/loadingSpinner";
 
 const AllEvents = () => {
-  // Define a state to store events
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +15,6 @@ const AllEvents = () => {
     setLoading(false);
   };
 
-  // Define a function to fetch events
   const getEvents = async (limit) => {
     try {
       setLoading(true);
@@ -30,38 +28,41 @@ const AllEvents = () => {
     }
   };
 
-  // Get events
   useEffect(() => {
-    // getTopEvents();
-    // getFeaturedEvents();
-    // getTrendingEvents();
     getEvents(30);
   }, []);
 
   return (
     <>
-      <div className="py-10 bg-dark">
-        <div className="container mx-auto  ">
-          <h2 className="text-4xl text-white  font-semibold">Events</h2>
+      {/* Header Section */}
+      <div className="py-6 sm:py-8 md:py-10 bg-dark">
+        <div className="container mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-white font-semibold">
+            Events
+          </h2>
         </div>
       </div>
 
-      <div className="container my-10 mx-auto  ">
+      {/* Main Content */}
+      <div className="container my-6 sm:my-8 md:my-10 mx-auto">
         <SearchBar />
         {loading ? (
           <LoadingSpinner />
         ) : (
-          <div className="grid grid-cols-4 gap-10">
-            {events &&
-              events.map((e, i) => {
-                return (
-                  <AdminEventCard
-                    key={i}
-                    event={e}
-                    onDelete={() => handleEventDelete(e.id)}
-                  />
-                );
-              })}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-10">
+            {events && events.length > 0 ? (
+              events.map((e, i) => (
+                <AdminEventCard
+                  key={i}
+                  event={e}
+                  onDelete={() => handleEventDelete(e.id)}
+                />
+              ))
+            ) : (
+              <p className="col-span-full text-center text-gray-500">
+                No events available.
+              </p>
+            )}
           </div>
         )}
       </div>

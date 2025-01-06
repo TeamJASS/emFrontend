@@ -10,7 +10,7 @@ import { events as MyEvents } from "../../dataPlaceHolder";
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage] = useState(4);
 
@@ -24,31 +24,6 @@ const EventList = () => {
       setLoading(false);
       console.log("get events error ----->", error);
     }
-  };
-
-  // const getEventsByDate = async (date) => {
-  //   try {
-  //     setLoading(true);
-  //     const data = await fetchEvents(date);
-  //     data.forEach((element) => {
-  //       element.rating = 5;
-  //       element.genres = ["Reggae", "Gospel", "Hip-Hop"];
-  //       element.title = element.name;
-  //     });
-  //     data.length ? setEvents(data) : setEvents(MyEvents);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     setLoading(false);
-  //     console.error("get events error ----->", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getEventsByDate(selectedDate);
-  // }, [selectedDate]);
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
   };
 
   useEffect(() => {
@@ -74,22 +49,25 @@ const EventList = () => {
         }}
       >
         <div className="container mx-auto">
-          <h2 className="text-5xl text-white text-center font-semibold">
+          <h2 className="text-4xl sm:text-4xl md:text-5xl text-white text-center font-semibold">
             Discover and Book tickets to the Best Events!
           </h2>
         </div>
       </div>
-      <div className="container mx-auto">
-        <div className="flex my-20">
-          <div className="w-[20%] h-auto">
-            <FilterSection onDateChange={handleDateChange} />
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col sm:flex-row my-20 gap-8">
+          {/* Filter Section */}
+          <div className="w-full sm:w-1/2 lg:w-1/3 px-2">
+            <FilterSection onDateChange={() => {}} />
           </div>
-          <div className="w-[80%]">
+
+          {/* Event List */}
+          <div className="w-full sm:w-3/4 ">
             {loading ? (
               <LoadingSpinner />
             ) : (
               <>
-                <div className="grid grid-cols-4 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {currentEvents.map((e, i) => (
                     <TrendingEventCard event={e} key={i} />
                   ))}

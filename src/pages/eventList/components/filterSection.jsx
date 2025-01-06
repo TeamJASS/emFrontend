@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -9,7 +8,7 @@ const FilterSection = ({ onDateChange }) => {
 
   const handleDateChange = (date) => {
     setStartDate(date);
-    onDateChange(date);
+    onDateChange(date); // Pass the selected date to the parent component for filtering
   };
 
   const handleSearchChange = (e) => {
@@ -17,8 +16,8 @@ const FilterSection = ({ onDateChange }) => {
   };
 
   return (
-    <div className="flex flex-col bg-white p-2 shadow-lg rounded-md w-64 h-screen overflow-y-auto">
-      <h1 className="text-2xl font-bold mb-4">Search for events</h1>
+    <div className="flex flex-col bg-gray-50 p-4 shadow-lg rounded-md w-full sm:w-80 md:w-64 h-auto sm:max-h-[80vh] overflow-y">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4">Search for events</h1>
 
       {/* Date Filter */}
       <div className="mb-4">
@@ -27,7 +26,9 @@ const FilterSection = ({ onDateChange }) => {
           selected={startDate}
           onChange={handleDateChange}
           inline
-          className="w-full border border-gray-300 rounded-md"
+          className="w-full border border-gray-300 rounded-md p-2"
+          dateFormat="MMMM d, yyyy" // Format the date
+          placeholderText="Select a date"
         />
       </div>
 

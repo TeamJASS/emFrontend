@@ -43,7 +43,7 @@ const Hero = (props) => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="bg-dark h-[65vh] "
+        className="bg-dark h-[65vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh]"
         loop={true}
       >
         {props.events.map((event, index) => {
@@ -52,7 +52,7 @@ const Hero = (props) => {
               key={index}
               className="bg-center bg-[#1D0E24] bg-cover flex align-bottom items-end justify-center h-full relative"
             >
-              <div className="absolute h-[65vh] z-[-1] w-full">
+              <div className="absolute h-[65vh]  z-[-1] w-full">
                 <img
                   src={`https://savefiles.org/${event.image}?shareable_link=286`}
                   style={{ width: "80%", margin: "auto", display: "block" }}
@@ -64,8 +64,8 @@ const Hero = (props) => {
                   style={{ mixBlendMode: "multiply" }}
                 ></div>
               </div>
-              <div className="py-20 flex flex-col align-middle justify-center gap-10">
-                <h1 className="text-6xl font-semibold">{event.title}</h1>
+              <div className="py-20 flex flex-col align-middle justify-center gap-10 bg-">
+                <h1 className="text-5xl font-semibold">{event.title}</h1>
                 <p className="text-2xl">@ {event.location}</p>
                 <button className="bg-white text-primary-dark w-[200px] text-md font-bold p-3 px-5 my-5 capitalize rounded-xl shadow-lg hover:shadow-xl hover:bg-primary-dark hover:text-white m-auto">
                   BOOK
@@ -76,16 +76,18 @@ const Hero = (props) => {
         })}
       </Swiper>
       <div className="p-6">
-        <div className="bg-primary p-10 flex flex-col justify-start align-middle gap-4 w-[70%] m-auto">
-          <h1 className="text-5xl font-semibold">Where is the Tukio at?</h1>
-          <div className="flex">
+        <div className="bg-primary p-6 sm:p-8 md:p-10 flex flex-col justify-start items-center gap-4 w-full sm:w-[80%] md:w-[70%] m-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center">
+            Where is the Tukio at?
+          </h1>
+          <div className="w-full">
             <form
               onSubmit={handleSubmit}
-              className="flex items-center align-middle text-gray-400 w-full gap-1"
+              className="flex flex-wrap items-center gap-2 sm:gap-3 justify-between text-gray-400 w-full"
             >
               <select
                 name="city"
-                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1"
+                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1 mb-3 sm:mb-0"
                 placeholder="Location(city)"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
@@ -98,7 +100,7 @@ const Hero = (props) => {
               </select>
               <select
                 name="category"
-                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1"
+                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1 mb-3 sm:mb-0"
                 placeholder="Category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -113,7 +115,7 @@ const Hero = (props) => {
                 <option value="Online">Online</option>
               </select>
               <DatePicker
-                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1"
+                className="px-3 py-3 border border-gray-300 focus:outline-none focus:border-primary flex-1 mb-3 sm:mb-0"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 dateFormat="MM/yyyy"
@@ -122,7 +124,7 @@ const Hero = (props) => {
               />
               <button
                 type="submit"
-                className="bg-dark text-white px-5 py-3.5  hover:bg-primary-dark focus:outline-none flex-1 "
+                className="bg-dark text-white px-5 py-3.5 hover:bg-primary-dark focus:outline-none w-full sm:w-auto"
               >
                 SHOW ME
               </button>

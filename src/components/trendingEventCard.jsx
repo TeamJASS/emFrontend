@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import { HeartIcon, StarIcon } from "@heroicons/react/24/outline";
 
 const TrendingEventCard = (props) => {
@@ -11,49 +10,60 @@ const TrendingEventCard = (props) => {
   }
 
   return (
-    <div className="relative flex flex-col border-gray-300 border-[1px] rounded-lg  ">
+    <div className="relative flex flex-col border-gray-300 border-[1px] rounded-lg">
+      {/* Category and Favorite Icon */}
       <div className="flex justify-between">
-        <button className="absolute text-sm p-1 text-white left-0 top-0 bg-primary w-[40%] hover:bg-dark">
+        <button className="absolute text-xs sm:text-sm p-1 text-white left-0 top-0 bg-primary w-[40%] hover:bg-dark rounded-tr-lg">
           {props.event.category}
         </button>
-        <HeartIcon className="absolute h-7 w-7 text-white font-extrabold right-0 top-0 " />
+        <HeartIcon className="absolute h-6 w-6 sm:h-7 sm:w-7 text-white font-extrabold right-0 top-0 m-2" />
       </div>
-      <div className="h-[200px]">
+
+      {/* Event Image */}
+      <div className="h-[280px] sm:h-[300px] md:h-[350px]">
         <img
           src={`https://savefiles.org/${props.event.image}?shareable_link=286`}
           alt={props.event.title}
-          style={{ width: "100%", height: "200px" }}
-          className="rounded-t-lg"
+          className="w-full h-full object-cover rounded-t-lg"
         />
       </div>
-      <div className="flex flex-col gap-2 p-2">
-        <h4 className="text-xl text-gray-700 font-semibold truncate">
+
+      {/* Event Details */}
+      <div className="flex flex-col gap-2 p-2 sm:p-3 md:p-4">
+        <h4 className="text-base sm:text-lg md:text-xl text-gray-700 font-semibold truncate">
           {props.event.title}
         </h4>
         <div className="flex">{stars}</div>
-        <p className="text-gray-400 text-sm">
+        <p className="text-gray-400 text-xs sm:text-sm">
           {props.event.date} {props.event.time}
         </p>
-        <p className="text-gray-400 text-sm">@ {props.event.location}</p>
-        <div className="flex gap-4 align-middle items-center my-2">
-          {props.event.genres.map((genre, i) => {
-            return (
-              <span
-                key={i}
-                className="p-1 border-[1px] text-sm text-secondary rounded-lg border-secondary"
-              >
-                {genre}
-              </span>
-            );
-          })}
+        <p className="text-gray-400 text-xs sm:text-sm">
+          @ {props.event.location}
+        </p>
+
+        {/* Event Genres */}
+        <div className="flex gap-2 flex-wrap align-middle items-center my-2">
+          {props.event.genres.map((genre, i) => (
+            <span
+              key={i}
+              className="p-1 border-[1px] text-xs sm:text-sm text-secondary rounded-lg border-secondary"
+            >
+              {genre}
+            </span>
+          ))}
         </div>
 
-        <div className="flex gap-4 w-full mt-6 border-t-gray-300 border-y-[1px]">
+        {/* Price and Booking Section */}
+        <div className="flex gap-4 w-full mt-4 sm:mt-6 border-t-gray-300 border-y-[1px] py-2">
           <div className="w-[40%]">
-            <h4 className="text-xl text-gray-500">From</h4>
-            <h4 className="text-xl font-bold">GHC{props.event.price}</h4>
+            <h4 className="text-sm sm:text-base md:text-lg text-gray-500">
+              From
+            </h4>
+            <h4 className="text-base sm:text-lg md:text-xl font-bold">
+              GHC{props.event.price}
+            </h4>
           </div>
-          <button className="w-[60%] bg-primary p-4 text-2xl rounded-lg text-white hover:bg-dark">
+          <button className="w-[60%] bg-primary p-2 sm:p-3 md:p-4 text-sm sm:text-lg md:text-xl rounded-lg text-white hover:bg-dark">
             Book
           </button>
         </div>
